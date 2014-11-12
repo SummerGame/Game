@@ -1,0 +1,256 @@
+﻿<Window x:Class="FSM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FSM" MinHeight="640" Width="1050" MinWidth="1050">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
+            <TabControl>
+                <TabItem Header="Создание">
+                    <StackPanel>
+                        <GroupBox Header="Создание функции перехода" >
+                            <StackPanel>
+                                <TextBlock TextAlignment="Center">F:</TextBlock>
+                                <TextBox x:Name="Function"></TextBox>
+                                <StackPanel Orientation="Vertical">
+
+                                    <!--states-->
+                                    <Grid>
+                                        <Label>Откуда:</Label>
+                                        <ComboBox x:Name="From"  Style="{StaticResource RightCB}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Label>Куда:</Label>
+                                        <ComboBox x:Name="To" Style="{StaticResource RightCB}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Label>Буква:</Label>
+                                        <ComboBox x:Name="WhichLetter" Style="{StaticResource RightCB}">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </Grid>
+
+                                </StackPanel>
+                                <Button Click="AddNewFunction">Создать функцию перехода!</Button>
+                            </StackPanel>
+                        </GroupBox>
+
+
+                        <GroupBox Header="Создание нового состояния">
+                            <StackPanel>
+                                <TextBlock>Введите название:</TextBlock>
+                                <TextBox x:Name="State"/>
+                                <CheckBox x:Name="IsLast" IsChecked="True">Терминальное состояние</CheckBox>
+                                <Button Click="AddNewState">Создать состояние!</Button>
+                            </StackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="Создание новой буквы">
+                            <StackPanel>
+                                <Label>Название буквы:</Label>
+                                <TextBox x:Name="LetterName"/>
+                                <Label>Описание:</Label>
+                                <TextBox x:Name="LetterDescription"/>
+                                <Button Click="AddNewLetter">Add</Button>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Редактирование">
+                    <StackPanel>
+                        <!-- binding к states-->
+                        <ComboBox x:Name="FirstCondition">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Click="SetFirstCondition">Назначить входную вершину</Button>
+                        <GroupBox Header="Удаление состояний">
+                            <StackPanel>
+                                <!-- binding к states-->
+                                <ComboBox x:Name="WhichStateRemove">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Button Click="RemoveState">Удалить выбранное состояние</Button>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Удаление переходов">
+                            <StackPanel>
+                                <!-- binding к function-->
+                                <ComboBox x:Name="WhichFunctionRemove">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Button Click="RemoveFunction">Удалить выбранный переход</Button>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Удаление букв из алфавита">
+                            <StackPanel>
+                                <!-- binding к алфавиту-->
+                                <ComboBox x:Name="WhichLetterRemove">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Button Click="RemoveButton">Удаление буквы</Button>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Тесты">
+                    <StackPanel>
+                        <GroupBox Header="Проверка на детерменированность">
+                            <StackPanel>
+                                <Button Click="Determ">Тест</Button>
+                                <TextBlock x:Name="isDet"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Проверка слова">
+                            <StackPanel>
+                                <Label>Введите слово:</Label>
+                                <TextBox x:Name="Word"/>
+                                <Button Click="CheckWord">Проверить</Button>
+                                <TextBlock x:Name="checkResult"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <Button Click="Clear">Почистить</Button>
+                        <GroupBox Header="Найти все слова">
+                            <StackPanel>
+                                <Button Click="FindWords">Найти слова:</Button>
+                                <Grid>
+                                    <ListBox x:Name="Words" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" VerticalAlignment="Stretch" MaxHeight="300"/>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Загрузка/Сохранение">
+                    <StackPanel>
+                        <GroupBox Header="Сохранение">
+                            <StackPanel>
+                                <Label>Введите имя для файла:</Label>
+                                <TextBox x:Name="MachineName"/>
+                                <Button Click="Save">Сохранить</Button>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="Загрузка файла">
+                            <StackPanel>
+                                <Button Click="Download">Загрузить</Button>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </Border>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2">
+            <Canvas Background="Azure"  x:Name="Field" MinWidth="590" MinHeight="500" SizeChanged="UpdateField"/>
+        </Border >
+
+        <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="1.5,0,0,0">
+            <TabControl>
+                <TabItem Header="Функции" >
+                    <ListBox x:Name="AllFunctions" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel >
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Имя функции:</TextBlock>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Откуда:</TextBlock>
+                                    <TextBlock Text="{Binding From.Name}"/>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Куда:</TextBlock>
+                                    <TextBlock Text="{Binding To.Name}"/>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">По какой букве:</TextBlock>
+                                    <TextBlock Text="{Binding Letter.Name}"/>
+                                    <Grid>
+                                        <Canvas Background="Black" Height="1"></Canvas>
+                                    </Grid>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+
+                <TabItem Header="Состояния" >
+                    <ListBox x:Name="AllStates" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Имя:</TextBlock>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Является ли последней:</TextBlock>
+                                    <TextBlock Text="{Binding IsLast}"/>
+                                    <Grid>
+                                        <Canvas Background="Black" Height="1"></Canvas>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+
+                <TabItem Header="Буквы" >
+                    <ListBox x:Name="AllLetters" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Имя:</TextBlock>
+                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Style="{StaticResource BoldTextblock}">Описание:</TextBlock>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <Grid>
+                                        <Canvas Background="Black" Height="1"></Canvas>
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </TabItem>
+            </TabControl>
+        </Border>
+    </Grid>
+</Window>

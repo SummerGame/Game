@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--Объекты-->
+        <ResourceDictionary Source="Objects/Barrel.xaml"/>
+        <ResourceDictionary Source="Objects/Bullet.xaml"/>
+        <ResourceDictionary Source="Objects/Rocket.xaml"/>
+        <ResourceDictionary Source="Objects/TankShell1.xaml"/>
+
+        <!--Транспорт-->
+        <ResourceDictionary Source="Transport/BA6.xaml"/>
+        <ResourceDictionary Source="Transport/GAZ-AA.xaml"/>
+        <ResourceDictionary Source="Transport/gun122mm.xaml"/>
+        <ResourceDictionary Source="Transport/KI-27.xaml"/>
+        <ResourceDictionary Source="Transport/SU-12-1.xaml"/>
+        <ResourceDictionary Source="Transport/T-37.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

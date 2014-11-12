@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameEngine.Characters.AttackAction">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\AttackAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Features" BaseTypeListCollapsed="true">
+    <Position X="22" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAACIAACQBgAAAAQgABAAAAAgAYAAAAAAAAAQA=</HashCode>
+      <FileName>Characters\Features.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GameEngine.Characters.SameType">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAABAAAAAA=</HashCode>
+      <FileName>Characters\Features.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Group">
+    <Position X="25.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAAgAAAAAAAAAAAAAAAQAAAACAgAAAAAAAQAAQEA=</HashCode>
+      <FileName>Characters\Group.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.MoveAction">
+    <Position X="14.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAIAAAAAAAAAAAAAAKCAAADFAAgAAAAAAAAA=</HashCode>
+      <FileName>Characters\MoveAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Way">
+    <Position X="23.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Characters\MoveAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Unit">
+    <Position X="2.5" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAIAAAAAIAAEARCAAI=</HashCode>
+      <FileName>Characters\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Groups.BikovGroup">
+    <Position X="0.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Groups\BikovGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Groups.JapaneseGroup">
+    <Position X="2.75" Y="10.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Groups\JapaneseGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Characters.Groups.TankBattalion">
+    <Position X="5.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Groups\TankBattalion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Extension">
+    <Position X="19.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Extension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Game">
+    <Position X="27.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAQAgEAAIAAAAAAAAAAAAAAAIAAAAAQA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.GameMap">
+    <Position X="17.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAACAAAAAgAAEAAABAQAAAAEQAAAAEAAAA=</HashCode>
+      <FileName>GameMap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.MapSerializer">
+    <Position X="23.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MapSerializer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.City">
+    <Position X="7.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\City.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Field">
+    <Position X="12" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Field.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Forest">
+    <Position X="14.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Forest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Landscape">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAIAAAACAAAAAAAAAAAAIAAAACAAAAAAAABAAAA=</HashCode>
+      <FileName>Lands\Landscape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Lowland">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Lowland.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Mountains">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Mountains.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Road">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Road.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Lands.Water">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lands\Water.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Object.ArmoredVehicles">
+    <Position X="8.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Object\ArmoredVehicles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Object.EquipmentMark">
+    <Position X="8.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABACAAAAAAAAAAAQAAgAEAAAAAAAAAA=</HashCode>
+      <FileName>Object\EquipmentMark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.Object.Goods">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Object\Goods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.StoryTelling.State">
+    <Position X="11.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>StoryTelling\State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.StoryTelling.Stories">
+    <Position X="22" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StoryTelling\Stories.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.StoryTelling.Story">
+    <Position X="8.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAA=</HashCode>
+      <FileName>StoryTelling\Story.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.StoryTelling.UnitState">
+    <Position X="11.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>StoryTelling\UnitState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameEngine.StoryTelling.UnitStory">
+    <Position X="8.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StoryTelling\UnitStory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GameEngine.Characters.Rank" Collapsed="true">
+    <Position X="21.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAA=</HashCode>
+      <FileName>Characters\Group.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.Characters.Specialization" Collapsed="true">
+    <Position X="16.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Group.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.Characters.Qualification" Collapsed="true">
+    <Position X="20" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAACAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Characters\Group.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.Characters.Vitality" Collapsed="true">
+    <Position X="20" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAIAAAAAAAAAEA=</HashCode>
+      <FileName>Characters\Group.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.Object.Caliber" Collapsed="true">
+    <Position X="16.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAAAAAAACAAEAAAAAAAQAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Object\EquipmentMark.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.Object.ObjectType" Collapsed="true">
+    <Position X="18.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIgAAAEAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Object\Goods.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameEngine.StoryTelling.StateAction" Collapsed="true">
+    <Position X="18.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StoryTelling\UnitState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,148 @@
+﻿<Page x:Class="ProtoMap5.TestControls.TestRunControls"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:Commands="clr-namespace:ProtoMap5.Commands"
+      xmlns:test="clr-namespace:MyTestEnvironment;assembly=MyTestEnvironment" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      MinWidth="200"
+	Title="Test Run Controls">
+
+    <Page.CommandBindings>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.RunCommand}" CanExecute="RunTestsCanExecute" Executed="RunTestsExecute"/>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.StopCommand}" CanExecute="StopRunCanExecute" Executed="StopRunExecute"/>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.PauseCommand}" CanExecute="PauseRunCanExecute" Executed="PauseRunExecute"/>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.NextOneCommand}" CanExecute="RunNextTestCanExecute" Executed="RunNextTestExecute"/>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.PrevOneCommand}" CanExecute="RunPrevTestCanExecute" Executed="RunPrevTestExecute"/>
+        <CommandBinding Command="{x:Static Member=Commands:InterfaceCommands.RestartCommand}" CanExecute="RestartCanExecute" Executed="RestartExecuted"/>
+    </Page.CommandBindings>
+
+    <GroupBox Name="MainBox">
+
+        <GroupBox.Header>
+            Управление воспроизведением
+        </GroupBox.Header>
+
+        <DockPanel>
+
+            <Button DockPanel.Dock="Bottom" Template="{StaticResource LeftArrowButton}" 
+                    HorizontalAlignment="Left" Margin="10,10,10,10"/>
+
+            <StackPanel Margin="10,10,10,10">
+
+                <!-- Upper part - control buttons -->
+                <!-- Upper group of buttons - test run controls -->
+                <WrapPanel>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Member=Commands:InterfaceCommands.RunCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Общий прогон тестов</Button.ToolTip>
+                        <Image Source="..\Images\Icon00.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.StopCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Прекратить прогон тестов</Button.ToolTip>
+                        <Image Source="..\Images\Icon01.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.PauseCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Приостановить прогон тестов</Button.ToolTip>
+                        <Button.InputBindings>
+                            <KeyBinding Gesture="F1" Command="{x:Static Commands:InterfaceCommands.PauseCommand}"/>
+                            <MouseBinding Gesture="LeftClick" Command="{x:Static Commands:InterfaceCommands.PauseCommand}"/>
+                        </Button.InputBindings>
+                        <Image Source="..\Images\Icon02.ico" Width="20"/>
+                    </Button>
+
+                    <!--
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.RunCommand}">
+                        <Button.ToolTip>Возобновить прогон тестов</Button.ToolTip>
+                        <Image Source="..\Images\Icon03.ico" Width="20"/>
+                    </Button>
+                    -->
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.RestartCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Начать прогон заново</Button.ToolTip>
+                        <Image Source="..\Images\Icon04.ico" Width="20"/>
+                    </Button>
+
+                </WrapPanel>
+
+                <GridSplitter Height="5"/>
+
+                <!-- Lower group of buttons - step controls -->
+                <WrapPanel>
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.RunCommand}">
+                        <Button.ToolTip>Предыдущий цикл тестов</Button.ToolTip>
+                        <Image Source="..\Images\Icon05.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.PrevOneCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Предыдущий тест</Button.ToolTip>
+                        <Image Source="..\Images\Icon06.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.NextOneCommand}"
+                            Click="ButtonClick">
+                        <Button.ToolTip>Следующий тест</Button.ToolTip>
+                        <Image Source="..\Images\Icon07.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.RunCommand}">
+                        <Button.ToolTip>Следующий цикл тестов</Button.ToolTip>
+                        <Image Source="..\Images\Icon08.ico" Width="20"/>
+                    </Button>
+
+                    <Button Template="{StaticResource ResourceKey=squareButton}"
+                        Command="{x:Static Commands:InterfaceCommands.RunCommand}">
+                        <Button.ToolTip>Сохранить текущий тест</Button.ToolTip>
+                        <Image Source="..\Images\Icon11.ico" Width="20"/>
+                    </Button>
+                </WrapPanel>
+
+                <GridSplitter Height="10"/>
+
+                <!-- Lower part - information -->
+                <StackPanel Grid.Column="1">
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Label>Тест №</Label>
+                        <TextBox Text="{Binding Path=CurrentTestNumber, Mode=TwoWay}"></TextBox>
+                        <Label>из</Label>
+                        <TextBlock Text="{Binding Path=MaxTestNumber}" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+
+                    <GridSplitter Height="10"/>
+
+                    <StackPanel>
+                        <Label>Частота показа:</Label>
+                        <StackPanel  Name="FrequencyPanel"
+                                     Grid.Column="2" Grid.Row="1" 
+                                     Orientation="Horizontal" Margin="10,0,0,0">
+                            <TextBox Text="{Binding Path=Frequency, Mode=TwoWay}"/>
+                            <Label>раз в 10 секунд</Label>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+
+            </StackPanel>
+
+        </DockPanel>
+
+    </GroupBox>
+</Page>

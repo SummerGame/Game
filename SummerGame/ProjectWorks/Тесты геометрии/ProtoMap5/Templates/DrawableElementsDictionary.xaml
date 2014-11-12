@@ -1,0 +1,148 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:test="clr-namespace:MyTestEnvironment;assembly=MyTestEnvironment"
+                    xmlns:conv="clr-namespace:ProtoMap5.Converters">
+
+    <conv:PolygonValueConverter x:Key="PolygonConverter"/>
+    
+    <!-- DrawableElement -->
+    <DataTemplate x:Key="DrawableElement" DataType="test:DrawableElement">
+
+        <ContentControl Name="AControl"/>
+
+        <DataTemplate.Triggers>
+
+            <!-- Text -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Text">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <ItemsControl ItemsSource="{Binding Path=Comment}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Ellipse -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Ellipse">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Ellipse Stroke="{Binding Color}" ToolTip="{Binding Comment[0]}"
+                                         Width="{Binding Parameters[0]}" 
+                                         Height="{Binding Parameters[1]}"/>
+                                <ContentControl Content="{Binding Path=Name}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Point -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Point">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Ellipse Fill="Red" Width="5" Height="5" ToolTip="{Binding Path=Comment[0]}"
+                                         Canvas.Left="-3" Canvas.Top="-3"/>
+                                <ContentControl Content="{Binding Path=Name}" 
+                                       Canvas.Left="3" Canvas.Top="3"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Segment -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Segment">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Line Stroke="{Binding Color}" StrokeThickness="1" 
+                                      X1="{Binding Parameters[0]}" Y1="{Binding Parameters[1]}"
+                                      X2="{Binding Parameters[2]}" Y2="{Binding Parameters[3]}"
+                                      ToolTip="{Binding Comment[0]}"/>
+                                <Label Content="{Binding Name}" 
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Vector -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Vector">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Line Stroke="{Binding Color}" StrokeThickness="1" 
+                                      X1="{Binding Parameters[0]}" Y1="{Binding Parameters[1]}"
+                                      X2="{Binding Parameters[2]}" Y2="{Binding Parameters[3]}"
+                                      ToolTip="{Binding Comment[0]}"/>
+                                <Ellipse Width="5" Height="5" Fill="Black"
+                                         Canvas.Left="{Binding Parameters[0]}" Canvas.Top="{Binding Parameters[1]}"/>
+                                <Label Content="{Binding Name}" 
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Polygon -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Polygon">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Polygon Points="{Binding Parameters, Converter={StaticResource PolygonConverter}}" 
+                                         Stroke="Black" ToolTip="{Binding Comment[0]}"/>
+                                <Label Content="{Binding Name}" Canvas.Left="{Binding Parameters[0]}" Canvas.Top="{Binding Parameters[1]}"
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- Chart -->
+    <DataTemplate x:Key="Chart" DataType="test:Chart">
+
+        <ItemsControl 
+            ItemsSource="{Binding Elements}" 
+            ItemTemplate="{StaticResource DrawableElement}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas>
+                        <!--
+                        <Canvas.LayoutTransform>
+                            <TransformGroup>
+                                <TranslateTransform X="0" Y="350"/>
+                                <ScaleTransform CenterX="50" CenterY="50" ScaleY="-1"/>
+                            </TransformGroup>
+                        </Canvas.LayoutTransform>
+                        -->
+                    </Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                    <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+
+    </DataTemplate>
+
+
+</ResourceDictionary>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Characters>
+  <Unit Side="0" Visible="0.5" CurSpeed="0.35" CurVisible="0.5" Speed="0.35" UnitType="Infantry">
+    <ConvexPolygon Points="-0,3 3,9 -0,3 4,1 -0,0999999999999999 4,1 -0,0999999999999999 3,9" Normals="-0,2 0 0 0,2 0,2 0 0 -0,2" />
+    <Groups>
+      <Group Count="90" Rank="Ordinary" Specialization="TankMan" Qualification="low" Experience="low" Vitality="healthy" />
+      <Group Count="360" Rank="Ordinary" Specialization="InfantryMan" Qualification="low" Experience="low" Vitality="healthy" />
+    </Groups>
+    <Items>
+	   <Goods Count="1000" ItemType="Ammunition" />
+      <EquipmentMark Count="12" Crew="1" FireRate="3" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="27" Crew="1" FireRate="2" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="300" Crew="1" FireRate="1" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="8" Crew="2" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="smallArms" />
+      <EquipmentMark Count="11" Crew="4" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="small" />
+      <EquipmentMark Count="4" Crew="2" FireRate="1" MoveSpeed="0.5" Armor="largeSmallArms" Weapon="medium" />
+      <EquipmentMark Count="10" Crew="2" FireRate="1" MoveSpeed="5" Armor="largeSmallArms" Weapon="smallArms" />
+    </Items>
+  </Unit>
+  <Unit Side="1" Visible="0.5" CurSpeed="5" CurVisible="0.5" Speed="5" UnitType="Armor">
+    <ConvexPolygon Points="-0,300000000000001 2,4 -0,300000000000001 2,6 -0,100000000000001 2,6 -0,100000000000001 2,4" Normals="-0,2 0 0 0,2 0,2 0 0 -0,2" />
+    <Area />
+    <Groups>
+      <Group Count="200" Rank="Ordinary" Specialization="TankMan" Qualification="low" Experience="low" Vitality="healthy" />
+    </Groups>
+    <Items>
+      <Goods Count="1000" ItemType="Ammunition" />
+      <EquipmentMark Count="50" Crew="4" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="small" />
+    </Items>
+  </Unit>
+  <Unit Side="0" Visible="0.5" CurSpeed="0.35" CurVisible="0.5" Speed="0.35" UnitType="Infantry">
+    <ConvexPolygon Points="-0,6 3,6 -0,6 3,8 -0,3999999999999999 3,8 -0,3999999999999999 3,6" Normals="" />
+    <Area />
+    <Groups>
+      <Group Count="90" Rank="Ordinary" Specialization="TankMan" Qualification="low" Experience="low" Vitality="healthy" />
+      <Group Count="360" Rank="Ordinary" Specialization="InfantryMan" Qualification="low" Experience="low" Vitality="healthy" />
+    </Groups>
+    <Items>
+      <Goods Count="1000" ItemType="Ammunition" />
+      <EquipmentMark Count="12" Crew="1" FireRate="3" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="27" Crew="1" FireRate="2" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="300" Crew="1" FireRate="1" MoveSpeed="0.35" Armor="smallArms" Weapon="smallArms" />
+      <EquipmentMark Count="8" Crew="2" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="smallArms" />
+      <EquipmentMark Count="11" Crew="4" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="small" />
+      <EquipmentMark Count="4" Crew="2" FireRate="1" MoveSpeed="0.5" Armor="largeSmallArms" Weapon="medium" />
+      <EquipmentMark Count="10" Crew="2" FireRate="1" MoveSpeed="5" Armor="largeSmallArms" Weapon="smallArms" />
+    </Items>
+  </Unit>
+  <Unit Side="1" Visible="0.5" CurSpeed="5" CurVisible="0.5" Speed="5" UnitType="Armor">
+    <ConvexPolygon Points="0,3 2,4 0,3 2,6 0,1 2,6 0,1 2,4" Normals="-0,2 0 0 0,2 0,2 0 0 -0,2" />
+    <Area />
+    <Groups>
+      <Group Count="200" Rank="Ordinary" Specialization="TankMan" Qualification="low" Experience="low" Vitality="healthy" />
+    </Groups>
+    <Items>
+      <Goods Count="1000" ItemType="Ammunition" />
+      <EquipmentMark Count="50" Crew="4" FireRate="2" MoveSpeed="5" Armor="largeSmallArms" Weapon="small" />
+    </Items>
+  </Unit>z
+  <Map Path="Maps\Khalkhyn Gol.xml" />
+</Characters>

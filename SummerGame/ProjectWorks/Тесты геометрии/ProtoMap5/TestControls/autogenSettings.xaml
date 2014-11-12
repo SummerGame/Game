@@ -1,0 +1,41 @@
+﻿<Page x:Class="ProtoMap5.TestControls.autogenSettings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="autogenSettings">
+
+    <GroupBox>
+        <GroupBox.Header>Настройки автогенератора</GroupBox.Header>
+        <DockPanel>
+
+            <DockPanel DockPanel.Dock="Bottom">
+                <Button DockPanel.Dock="Left" MaxWidth="150" MinWidth="100"
+                        HorizontalAlignment="Right" Margin="10,10,10,10" 
+                        Template="{StaticResource ResourceKey=LeftArrowButton}"/>
+                <Button DockPanel.Dock="Right" MaxWidth="150" MinWidth="100"
+                        HorizontalAlignment="Right" Margin="10,10,10,10" 
+                        Template="{StaticResource ResourceKey=RightArrowButton}"/>
+            </DockPanel>
+
+            <ListView Name="SettingsList">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn CellTemplate="{StaticResource VariableName}">
+                            <GridViewColumnHeader>Переменная</GridViewColumnHeader>
+                        </GridViewColumn>
+                        <GridViewColumn CellTemplate="{StaticResource VariableGeneration}">
+                            <GridViewColumnHeader>Значение</GridViewColumnHeader>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+
+            </ListView>
+
+
+        </DockPanel>
+    </GroupBox>
+
+</Page>

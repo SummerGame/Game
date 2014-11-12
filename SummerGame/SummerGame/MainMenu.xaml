@@ -1,0 +1,35 @@
+﻿<Window x:Class="SummerGame.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainMenu"
+        WindowStyle="None" 
+        Height="480" Width="640" 
+        MaxWidth="640" MaxHeight="480" 
+        ResizeMode="NoResize" Background="{x:Null}"  
+        AllowsTransparency="True" 
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Rectangle Fill="Black" RadiusX="5" RadiusY="5" Opacity="0.7"></Rectangle>
+        <Rectangle Stroke="Black" RadiusX="5" RadiusY="5" StrokeThickness="1" Opacity="0.4"></Rectangle>
+        <Rectangle Margin="1" Stroke="White" RadiusX="5" RadiusY="5" StrokeThickness="1" Opacity="0.2"></Rectangle>
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <Button MinHeight="40" MaxWidth="240" Click="ContinueGame" IsEnabled="True">Продолжить</Button>
+            <Button Click="StartNewGame" MinHeight="40" MaxWidth="240">Новая игра</Button>
+            <Button Click="LoadGame" MinHeight="40" MaxWidth="240" IsEnabled="False">Загрузить</Button>
+            <Button Click="SaveGame" IsEnabled="{Binding}" MinHeight="40" MaxWidth="240">Сохранить</Button>
+            <Button Click="ShowOptionsWindow" MinHeight="40" MaxWidth="240">Настройки</Button>
+            <Button Click="Tools" MinHeight="40" MaxWidth="240">Инструменты</Button>
+            <Button Click="OpenHelpWindow" MinHeight="40" MaxWidth="240" IsEnabled="True"> Помощь</Button>
+            <Button Click="ExitGame" MinHeight="40" MaxWidth="240">Выход</Button>
+        </StackPanel>
+    </Grid>
+</Window>

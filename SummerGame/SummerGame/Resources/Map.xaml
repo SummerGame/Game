@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:game="clr-namespace:UserInterface.Presenters;assembly=UserInterface"
+                    xmlns:GameEngine="clr-namespace:GameEngine;assembly=GameEngine">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Converters.xaml"/>
+        <ResourceDictionary Source="LandsDataTemplate.xaml"/>
+        <ResourceDictionary Source="UnitDataTemplate.xaml"/>
+        <ResourceDictionary Source="ActionMarkers.xaml"/>
+        <ResourceDictionary Source="ItemsDataTemplate.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate DataType="{x:Type game:MapPresenter}" x:Key="Map">
+        <!--<DataTemplate DataType="{x:Type game:GameMap}" x:Key="Map">-->
+        <Grid Name="MapLayers">
+
+            <!-- Просто белая подложка -->
+            <Rectangle Fill="White" Name="FakeFieldRectangle"/>
+
+            <Canvas>
+                <!-- Фоновое изображение -->
+                <Rectangle Name="BackgroundImage" Width="{Binding Width}" Height="{Binding Height}">
+                    <Rectangle.Style>
+                        <Style>
+                            <Setter Property="Canvas.Left" Value="{Binding MarginLeft}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding MarginTop}"/>
+                        </Style>
+                    </Rectangle.Style>
+                </Rectangle>
+            </Canvas>
+
+            <!-- Элементы ландшафта -->
+            <ItemsControl ItemsSource="{Binding Landscape}" ItemTemplate="{StaticResource Land}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+
+                        <Canvas Name="Field"></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+
+            <!-- геометрические объекты -->
+            <ItemsControl ItemsSource="{Binding Figures}"  ItemTemplate="{StaticResource Figure}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding Center.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Center.Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+
+            </ItemsControl>
+
+            <!-- Действия -->
+            <!-- TODO переделать на самостоятельный список приказов -->
+            <ItemsControl Name="ActionsMap"
+                ItemsSource="{Binding VisibleUnits}" ItemTemplate="{StaticResource UnitActionMarker}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding Position.Center.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Position.Center.Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+
+            <!-- Предметы 
+            <ItemsControl ItemsSource="{Binding VisibleItems}" ItemTemplate="{StaticResource Item}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding Position.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Position.Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl> -->
+
+            <!-- Войска -->
+            <ItemsControl ItemsSource="{Binding VisibleUnits}" ItemTemplate="{StaticResource Unit}" Name="UnitsMap">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding Position.Center.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Position.Center.Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+
+            </ItemsControl>
+
+            <!-- Предметы -->
+            <ItemsControl ItemsSource="{Binding VisibleItems}" ItemTemplate="{StaticResource Items}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas></Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="Canvas.Left" Value="{Binding Position.Center.X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Position.Center.Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

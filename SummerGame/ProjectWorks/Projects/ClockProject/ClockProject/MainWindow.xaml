@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:CP="clr-namespace:ClockProject"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="ClockProject.MainWindow"
+        Title="MainWindow" MinHeight="520" MinWidth="870" MaxHeight="520" MaxWidth="870">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="MyClockDataTemplate.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <StackPanel Orientation="Horizontal">
+        <Border Width="160" BorderBrush="Black" BorderThickness="1.5">
+            <StackPanel>
+                <Slider Minimum="0" Maximum="12" x:Name="Hours" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Hours_ValueChanged_1"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label>Часы:</Label>
+                    <Label Content="{Binding ElementName=Hours, Path=Value }"></Label>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Grid>
+            <ContentControl ContentTemplate="{StaticResource ClockDataTemplate}"/>
+        </Grid>
+    </StackPanel>
+</Window>

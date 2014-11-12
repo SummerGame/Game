@@ -1,0 +1,170 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:UI="clr-namespace:UserInterface.Presenters;assembly=UserInterface"
+                    xmlns:units="clr-namespace:GameEngine.Characters;assembly=GameEngine">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Converters.xaml"/>
+        <ResourceDictionary Source="UnitIcons.xaml"/>
+        <ResourceDictionary Source="Images.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Шаблон отрисовки единичного юнита на карте -->
+    <DataTemplate x:Key="Unit" DataType="{x:Type UI:UnitPresenter}">
+
+        <Canvas Name="TheCanvas">
+
+            <!-- Маркер точной позиции юнита -->
+            <Polygon Fill="{Binding Converter={StaticResource UnitToColor}}" 
+                     Points="{Binding Position.Points}" 
+                     IsHitTestVisible="False"/>
+
+            <!-- Иконка юнита NATOUnitIcon -->
+            <!--<ContentControl Content="{Binding}" IsHitTestVisible="False"
+                            ContentTemplate="{StaticResource NATOUnitIcon}" 
+                            Tag="{Binding Unit}" 
+                            Canvas.Left="-45"
+                            Canvas.Top="-50"/>-->
+
+            <!-- Иконка юнита NATO3D -->
+            <ContentControl Content="{Binding}" IsHitTestVisible="True"
+                            ContentTemplate="{StaticResource NATO3D}" 
+                            Width="90" Height="60"
+                            Tag="{Binding Unit}" 
+                            Canvas.Left="-50"
+                            Canvas.Top="-25"/>
+
+
+            <!-- Служебный маркер - изображение состояния боя -->
+            <Polygon Name="CombatMarker" IsHitTestVisible="False"
+                 Points="0,15 6,8 13,5 8,-3 7,-10 0,-7 -7,-10 -8,-3 -12,5 -5,8"
+                 Fill="Yellow" Stroke="Red" StrokeThickness="2"
+                 Opacity="0"
+                 />
+
+            <!--<ProgressBar Width="20" Height="5" Value="{Binding UnitPresenter, Path=Personnel}"></ProgressBar>-->
+
+        </Canvas>
+    </DataTemplate>
+
+    
+    <!--Шаблон для изображения юнита в его свойствах-->
+    <DataTemplate x:Key="UnitImage" DataType="{x:Type UI:UnitPresenter}">
+        <ContentControl Name="Image"/>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding UnitType}" Value="Пехота">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource InfantryImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Танковые войска">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource ArmorImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Инженерные войска">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource EngineersImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Артиллерия">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource ArtilleryImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Авиация">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource AirForceImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Кавалерия">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource CavalryImage}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding UnitType}" Value="Флот">
+                <Setter Property="Content" TargetName="Image" Value="{StaticResource NavyImage}"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- Шаблон изображения юнита в окне подробных сведений -->
+    <DataTemplate x:Key="UnitProperties" DataType="{x:Type UI:UnitPresenter}" >
+
+        <StackPanel HorizontalAlignment="Center" Margin="0,10,0,10" VerticalAlignment="Top" Width="400">
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Имя:</ContentControl>
+                <ContentControl Content="{Binding Name}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Страна:</ContentControl>
+                <ContentControl Content="{Binding Country}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Тип отряда:</ContentControl>
+                <ContentControl Content="{Binding UnitType}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <!--<Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Позиция:</ContentControl>
+                <ContentControl Content="{Binding Descr[2]}" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Количество групп:</ContentControl>
+                <ContentControl Content="{Binding Descr[3]}" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Звания групп:</ContentControl>
+                <ContentControl Content="{Binding Descr[4]}" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Типы групп:</ContentControl>
+                <ContentControl Content="{Binding Descr[5]}" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Состояние здоровья каждой группы:</ContentControl>
+                <ContentControl Content="{Binding Descr[6]}" HorizontalAlignment="Right"/>
+            </Grid>-->
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Общая численность:</ContentControl>
+                <ContentControl Content="{Binding AllPersonnel}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Количество дееспособных единиц:</ContentControl>
+                <ContentControl Content="{Binding ActivePersonnel}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Количество тяжелой техники:</ContentControl>
+                <ContentControl Content="{Binding WeaponsCount}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Скорость:</ContentControl>
+                <ContentControl Content="{Binding Speed}" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <Grid VerticalAlignment="Top">
+                <ContentControl HorizontalAlignment="Left">Амуниция:</ContentControl>
+                <ContentControl Content="{Binding Ammo}" HorizontalAlignment="Right"/>
+            </Grid>
+
+        </StackPanel>
+
+    </DataTemplate>
+
+    <!-- Шаблон кнопок инженера-->
+    <DataTemplate x:Key="EngineersButton">
+        <StackPanel>
+            <Button x:Name="BuildButton">Строить</Button>
+        </StackPanel>
+    </DataTemplate>
+    
+    <!-- Шаблон кнопок в меню юнита -->
+    <DataTemplate x:Key="MenuButtons" DataType="{x:Type UI:UnitPresenter}">
+        <ContentControl x:Name="Buttons"/>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Unit.UnitType}" Value="Engineers">
+                <Setter TargetName="Buttons" Property="ContentTemplate" Value="{StaticResource EngineersButton}"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+</ResourceDictionary>

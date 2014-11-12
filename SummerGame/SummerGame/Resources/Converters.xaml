@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:utils="clr-namespace:UserInterface;assembly=UserInterface">
+    
+    <utils:PolygonToPolygon x:Key="PolyToPoly"/>
+
+    <utils:PolylineToPolyline x:Key="PolylineToPoints"/>
+
+    <utils:CircleToCircle x:Key="CircleToCircle"/>
+
+    <utils:SegmentToSegment x:Key="SegmentToSegment"/>
+
+    <utils:CircleToX x:Key="CircleToX"/>
+
+    <utils:CircleToY x:Key="CircleToY"/>
+
+    <utils:FigureToCanvasLeft x:Key="FigureToCanvasLeft"/>
+
+    <utils:FigureToCanvasTop x:Key="FigureToCanvasTop"/>
+
+    <utils:AreaToCanvasLeft x:Key="AreaToCanvasLeft"/>
+
+    <utils:AreaToCanvasTop x:Key="AreaToCanvasTop"/>
+
+    <utils:UnitToColor x:Key="UnitToColor"/>
+    
+    <utils:UnitToStringsConverter x:Key="UnitToProperties"/>
+
+    <utils:ActionToDirection x:Key="MoveActionDirection"/>
+
+    <utils:ActionToLength x:Key="MoveActionLength"/>
+
+</ResourceDictionary>

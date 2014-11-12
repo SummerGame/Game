@@ -1,0 +1,142 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:test="clr-namespace:MyTestEnvironment;assembly=MyTestEnvironment">
+
+    <!-- Variable -->
+    <DataTemplate x:Key="Variable" DataType="test:Variable">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="{Binding Path=Name}"></Label>
+            <Label Grid.Column="1" Content="{Binding Path=Value}"></Label>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- VariablesSet -->
+    <DataTemplate x:Key="VariablesSet" DataType="test:VariablesSet">
+            <ItemsControl ItemsSource="{Binding Variables}" 
+                          ItemTemplate="{StaticResource Variable}"/>
+    </DataTemplate>
+
+    <!-- InputCreation -->
+    <DataTemplate x:Key="InputCreation" DataType="test:InputCreationMode">
+
+        <ContentControl Name="Presenter"/>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding}" Value="Manual">
+                <Setter TargetName="Presenter" Property="Content" Value="вручную"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding}" Value="FromFile">
+                <Setter TargetName="Presenter" Property="Content" Value="из файла"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding}" Value="AutoGeneration">
+                <Setter TargetName="Presenter" Property="Content" Value="автогенератор"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- GenerationStrategy -->
+    <DataTemplate x:Key="GenerationStrategy" DataType="test:GenerationStrategy">
+
+        <ContentControl Name="Presenter"/>
+
+        <DataTemplate.Triggers>
+
+            <DataTrigger Binding="{Binding}" Value="Const">
+                <DataTrigger.Setters>
+                    <Setter TargetName="Presenter" Property="Content" Value="Постоянная"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding}" Value="Iterate">
+                <DataTrigger.Setters>
+                    <Setter TargetName="Presenter" Property="Content" Value="Цикл"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding}" Value="Random">
+                <DataTrigger.Setters>
+                    <Setter TargetName="Presenter" Property="Content" Value="Случайная"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- StrategyDetailsTemplate -->
+    <Style x:Key="StrategyDetailsTemplate" TargetType="ContentControl">
+        <Style.Triggers>
+
+            <!-- Const -->
+            <DataTrigger Binding="{Binding Path=Strategy}" Value="Const">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding Path=Strategies}" 
+                                          ItemTemplate="{StaticResource GenerationStrategy}"
+                                          SelectedValue="{Binding Path=Strategy, Mode=TwoWay}"/>
+                                <TextBox Text="{Binding Path=Parameters[0], Mode=TwoWay}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Iterate -->
+            <DataTrigger Binding="{Binding Path=Strategy}" Value="Iterate">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding Path=Strategies}" 
+                                          ItemTemplate="{StaticResource GenerationStrategy}"
+                                          SelectedValue="{Binding Path=Strategy, Mode=TwoWay}"/>
+                                <Label Content="от"/>
+                                <TextBox Text="{Binding Path=Parameters[0], Mode=TwoWay}"/>
+                                <Label Content="до"/>
+                                <TextBox Text="{Binding Path=Parameters[1], Mode=TwoWay}"/>
+                                <Label Content="с шагом"/>
+                                <TextBox Text="{Binding Path=Parameters[2], Mode=TwoWay}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Random -->
+            <DataTrigger Binding="{Binding Path=Strategy}" Value="Random">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox ItemsSource="{Binding Path=Strategies}" 
+                                          ItemTemplate="{StaticResource GenerationStrategy}"
+                                          SelectedValue="{Binding Path=Strategy, Mode=TwoWay}"/>
+                                <Label Content="от"/>
+                                <TextBox Text="{Binding Path=Parameters[0], Mode=TwoWay}"/>
+                                <Label Content="до"/>
+                                <TextBox Text="{Binding Path=Parameters[1], Mode=TwoWay}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- VariableName -->
+    <DataTemplate x:Key="VariableName" DataType="test:VariableGeneratorMetadata">
+        <ContentControl Content="{Binding Path=VariableName}"/>
+    </DataTemplate>
+
+    <!-- VariableGeneration -->
+    <DataTemplate x:Key="VariableGeneration" DataType="test:VariableGeneratorMetadata">
+        <ContentControl Style="{StaticResource StrategyDetailsTemplate}"/>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,112 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:figure="clr-namespace:Geometry;assembly=Geometry"
+                    xmlns:figures="clr-namespace:Geometry.Figures;assembly=Geometry"
+                    xmlns:UI="clr-namespace:UserInterface.Presenters;assembly=UserInterface">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Converters.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- A template for individual figures in a landscape -->
+    <DataTemplate DataType="{x:Type UI:FigurePresenter}" x:Key="Figure">
+
+        <ContentControl Name="MyContent" Content="{Binding}"/>
+
+        <DataTemplate.Triggers>
+
+            <!-- Circle -->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Type figures:Circle}">
+                <Setter TargetName="MyContent" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Style="{StaticResource AreaFiguresStyle}"
+                                         Height="{Binding Radius}" 
+                                         Width="{Binding Radius}"
+                                         Tag="{Binding AParent}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- ConvexPolygon -->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Type figures:ConvexPolygon}">
+                <Setter TargetName="MyContent" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            
+                            <Path Data="{Binding SmoothedPath}"
+                                  Style="{StaticResource AreaFiguresStyle}"
+                                  Tag="{Binding AParent}"/>
+
+                            <!--<Polygon Style="{StaticResource AreaFiguresStyle}"
+                                         Points="{Binding Points}" 
+                                         Tag="{Binding AParent}"/>-->
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Polyline -->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Type figures:Polyline}">
+                <Setter TargetName="MyContent" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Polyline Style="{StaticResource AreaFiguresStyle}"
+                                          StrokeThickness="3"
+                                          Points="{Binding Points}"
+                                          Tag="{Binding AParent}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Segment -->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Type figures:Segment}">
+                <Setter TargetName="MyContent" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Polyline Style="{StaticResource AreaFiguresStyle}"
+                                          StrokeThickness="3"
+                                          Points="{Binding Points}" 
+                                          Tag="{Binding AParent}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Point -->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Type figures:Point}">
+                <Setter TargetName="MyContent" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Ellipse Style="{StaticResource AreaFiguresStyle}" 
+                                     Width="{Binding Radius}" Height="{Binding Radius}"
+                                     Tag="{Binding AParent}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- Landscape template -->
+    <DataTemplate DataType="{x:Type UI:LandscapePresenter}" x:Key="Land">
+        <ItemsControl ItemsSource="{Binding Figures}" ItemTemplate="{StaticResource Figure}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas></Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Left" Value="{Binding Center.X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Center.Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </DataTemplate>
+
+</ResourceDictionary>

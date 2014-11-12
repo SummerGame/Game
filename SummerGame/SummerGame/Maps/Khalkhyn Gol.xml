@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Map>
+  <Water>
+    <ConvexPolygon Points="1,6 3,2 1,6 3,4 0 3,8 0 3,6" Normals="" />
+    <ConvexPolygon Points="3,2 2,2 3,2 2,4 1,8 3,4 1,8 3,2" Normals="" />
+    <ConvexPolygon Points="3,8 1 3,8 1,2 3,2 2,4 3,2 2,2" Normals="" />
+    <ConvexPolygon Points="5 1 5 1,2 3,8 1,2 3,8 1" Normals="" />
+  </Water>
+  <City>
+    <ConvexPolygon Points="0,8 0,6 0,8 1,2 0,2 1,2 0,2 0,6" Normals="" />
+  </City>
+  <City>
+    <ConvexPolygon Points="3,2 1,4 3,2 1,8 2,8 1,8 2,8 1,4" Normals="" />
+  </City>
+  <Road>
+    <ConvexPolygon Points="1,2 0 1,8 3,2 1,6 3,2 1 0" Normals="" />
+    <ConvexPolygon Points="1,8 3,2 1,8 3,4 1,6 3,4 1,6 3,2" Normals="" />
+    <ConvexPolygon Points="1,8 3,4 2,6 5 2,4 5 1,6 3,4" Normals="" />
+  </Road>
+  <Lowland>
+    <ConvexPolygon Points="1,2 1,6 1,2 2 0 2 0 1,6" Normals="" />
+  </Lowland>
+  <Lowland>
+    <ConvexPolygon Points="3,4 2,8 3,6 3,2 2,6 4,2 2,2 3,6" Normals="" />
+  </Lowland>
+  <Forest>
+    <ConvexPolygon Points="3,8 0,2 3,2 1 2,4 0,2" Normals="" />
+  </Forest>
+  <Forest>
+    <ConvexPolygon Points="0,6 2,4 0,8 2,8 0,6 3,2 0 3,2 0 2,4" Normals="" />
+  </Forest>
+  <Forest>
+    <ConvexPolygon Points="4 3,8 4 4,8 3,4 4,8 3,4 3,8" Normals="" />
+  </Forest>
+  <Mountains>
+    <ConvexPolygon Points="4,2 1,6 5 2,4 4,2 3,4 3,6 2,6" Normals="" />
+  </Mountains>
+  <Mountains>
+    <ConvexPolygon Points="2,4 1 2,4 2 2,2 2,4 1,8 2 1,8 1" Normals="" />
+  </Mountains>
+  <Mountains>
+    <ConvexPolygon Points="1,4 2,6 1,4 3 1 3 1 2,2" Normals="" />
+  </Mountains>
+  <Mountains>
+    <ConvexPolygon Points="1 3,8 1,8 4,8 0,2 4,8 0,2 4,2" Normals="" />
+  </Mountains>
+</Map>

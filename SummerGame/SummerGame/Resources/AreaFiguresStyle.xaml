@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Area figures' style -->
+    <Style x:Key="AreaFiguresStyle" TargetType="Shape">
+        
+        <Style.Triggers>
+            
+            <!-- Road style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Road">
+                <Setter Property="Stroke" Value="Black"/> 
+            </DataTrigger>
+
+            <!-- Mountain style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Mountains">
+                <Setter Property="Fill" Value="Brown"/>
+                <Setter Property="Stroke" Value="Brown"/>
+            </DataTrigger>
+
+            <!-- Water style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Water">
+                <Setter Property="Stroke" Value="Aqua"/>
+            </DataTrigger>
+
+            <!-- City style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="City">
+                <Setter Property="Fill" Value="Orange"/>
+                <Setter Property="Stroke" Value="Orange"/>
+            </DataTrigger>
+
+            <!-- City style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Sand">
+                <Setter Property="Fill" Value="Yellow"/>
+                <Setter Property="Stroke" Value="Yellow"/>
+            </DataTrigger>
+
+            <!-- Forest style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Forest">
+                <Setter Property="Fill" Value="ForestGreen"/>
+                <Setter Property="Stroke" Value="ForestGreen"/>
+            </DataTrigger>
+
+            <!-- Lowland style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Lowland">
+                <Setter Property="Fill" Value="DarkGreen"/>
+                <Setter Property="Stroke" Value="DarkGreen"/>
+            </DataTrigger>
+
+            <!-- Field style -->
+            <DataTrigger Binding="{Binding AParent.Type}" Value="Field">
+                <Setter Property="Fill" Value="AntiqueWhite"/>
+                <Setter Property="Stroke" Value="AntiqueWhite"/>
+            </DataTrigger>
+
+        </Style.Triggers>
+        
+        <!-- Default -->
+        <Setter Property="Stroke" Value="Black"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- RightArrowButton -->
+    <ControlTemplate x:Key="RightArrowButton" TargetType="Button">
+        <Button MaxWidth="150" MinWidth="80" Command="NextPage">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Далее"/>
+                <Image Source="..\Images\arrow.gif" MaxHeight="30" MaxWidth="30"/>
+            </StackPanel>
+        </Button>
+    </ControlTemplate>
+
+    <!-- LeftArrowButton -->
+    <ControlTemplate x:Key="LeftArrowButton" TargetType="Button">
+        <Button MaxWidth="150" MinWidth="80" Command="PreviousPage">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="..\Images\larrow.gif" MaxHeight="30" MaxWidth="30"/>
+                <Label Content="Назад"/>
+            </StackPanel>
+        </Button>
+    </ControlTemplate>
+
+    <!-- squareButton -->
+    <ControlTemplate x:Key="squareButton" TargetType="Button">
+        <Button
+            MinWidth="30" MinHeight="30" 
+            MaxWidth="50" MaxHeight="50">
+            <ContentPresenter/>
+        </Button>
+    </ControlTemplate>
+
+</ResourceDictionary>

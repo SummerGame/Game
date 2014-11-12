@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:GameEngine="clr-namespace:GameEngine;assembly=GameEngine"
+                    xmlns:UI="clr-namespace:UserInterface.Presenters;assembly=UserInterface">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Models.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Шаблон для трехмерного значка -->
+    <DataTemplate x:Key="test" DataType="{x:Type UI:GameItemsPresenter}" x:Name="testim">
+
+        <Viewport3D x:Name="view">
+
+            <!-- A camera -->
+            <Viewport3D.Camera>
+                <PerspectiveCamera Position="1.5 1.5 1.5" LookDirection="-1 -1 -1" FieldOfView="60">
+                    <PerspectiveCamera.Transform>
+                        <RotateTransform3D CenterX="0.5" CenterY="0" CenterZ="0.125">
+                            <RotateTransform3D.Rotation>
+                                <AxisAngleRotation3D x:Name="Angle" Angle="0" Axis="0 1 0"/>
+                            </RotateTransform3D.Rotation>
+                        </RotateTransform3D>
+                    </PerspectiveCamera.Transform>
+                </PerspectiveCamera>
+            </Viewport3D.Camera>
+
+            <!-- Lights -->
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <AmbientLight Color="#404040"/>
+                        <DirectionalLight Direction="-1 -1 -1" Color="White"/>
+                        <DirectionalLight Direction="1 -1 1" Color="White"/>
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+
+            <ModelVisual3D x:Name="ModelToAdd"  Content="{Binding Item.Type}"/>
+
+        </Viewport3D>
+
+    </DataTemplate>
+
+    <!-- Шаблон отрисовки объекта -->
+    <DataTemplate x:Key="Items" DataType="{x:Type UI:GameItemsPresenter}" >
+
+        <Canvas Name="TheCanvas">
+
+            <Polygon Name="Polygon" IsHitTestVisible="False"
+                 Points="0,15 6,8 13,5 8,-3 7,-10 0,-7 -7,-10 -8,-3 -12,5 -5,8"
+                 Fill="Yellow" 
+                 Opacity="1"
+                 />
+            
+            <ContentControl x:Name="ModelControl"
+                            Content="{Binding}"
+                            IsHitTestVisible="True"
+                            Width="90" Height="60"
+                            Canvas.Left="-55"
+                            Canvas.Top="-55"
+                            ContentTemplate="{}"
+
+               />
+
+
+        </Canvas>
+
+        <DataTemplate.Triggers>
+
+            <DataTrigger Binding="{Binding Item.Type}" Value="Barrel">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource Barrel}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="BA_6">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource BA6}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="GAZ_AA">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource GAZ-AA}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="SU_12_1">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource SU-12-1}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="T_37">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource T-37}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="GUN122MM">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource gun122mm}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Item.Type}" Value="KI-27">
+                <Setter TargetName="ModelControl" Property="ContentTemplate" Value="{StaticResource KI-27}"/>
+            </DataTrigger>
+            
+            
+        </DataTemplate.Triggers> 
+
+
+    </DataTemplate>
+
+</ResourceDictionary>

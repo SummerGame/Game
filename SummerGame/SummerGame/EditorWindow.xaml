@@ -1,0 +1,415 @@
+﻿<Window x:Class="mapDrawer.MapEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:UI="clr-namespace:UserInterface;assembly=UserInterface"
+        xmlns:GEChar="clr-namespace:GameEngine.Characters;assembly=GameEngine"
+        xmlns:GE="clr-namespace:GameEngine;assembly=GameEngine"
+        xmlns:GEo="clr-namespace:GameEngine.Object;assembly=GameEngine"
+        
+        DataContext="{Binding Source={x:Static UI:UI.GamePresenter}, Mode=OneWay}"
+        
+        Background="Black" Opacity="0.7" AllowsTransparency="True" WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="Создание карты">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="Resources\Styles.xaml"/>-->
+                <ResourceDictionary Source="Resources/GameElements.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <DockPanel>
+
+        <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto"  HorizontalAlignment="Right" Width="330" Margin="0,6">
+            <TabControl  HorizontalAlignment="Left" Name="tabControl1" VerticalAlignment="Top" Grid.Column="0" Background="Black" DockPanel.Dock="Left" MaxWidth="400">
+                <TabItem Header="Ландшафт" Name="Landscapes">
+                    <Grid>
+                        <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black">
+                            <StackPanel>
+                                <Button Click="loadImage" >Загрузить фоновую картинку</Button>
+                                <GroupBox Header="Создание элементов:">
+                                    <StackPanel>
+                                        <Button Click="drawArea">Нарисовать</Button>
+                                        <Button Click="resetPoints">Удалить все точки</Button>
+                                        <GroupBox Header="Местность">
+                                            <StackPanel>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="roadChecked" IsChecked="True">Дорога</RadioButton>
+                                                    <Label Background="Black" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="forestChecked">Лес</RadioButton>
+                                                    <Label Background="Green" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="sandChecked">Песок</RadioButton>
+                                                    <Label Background="Yellow" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="waterChecked">Вода</RadioButton>
+                                                    <Label Background="Aqua" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="fieldChecked">Поле</RadioButton>
+                                                    <Label Background="AntiqueWhite" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="cityChecked">Город</RadioButton>
+                                                    <Label Background="Orange" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="lowlandChecked">Низина</RadioButton>
+                                                    <Label Background="DarkGreen" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                                <Grid >
+                                                    <RadioButton GroupName="shapeColor" Checked="mountainChecked">Горы</RadioButton>
+                                                    <Label Background="Brown" Style="{StaticResource rightLabel}"/>
+                                                </Grid>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
+
+                                <GroupBox Header="Изменение карты:">
+                                    <StackPanel>
+                                        <Grid>
+                                            <Label Style="{StaticResource leftLabel}">Введите ширину (в км):</Label>
+                                            <TextBox x:Name="canvasWidthTB" Style="{StaticResource rightTextBox}" Width="55" TextAlignment="Center"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Label Style="{StaticResource leftLabel}">Введите высоту (в км):</Label>
+                                            <TextBox x:Name="canvasHeightTB" Style="{StaticResource rightTextBox}" Width="55" TextAlignment="Center"/>
+                                        </Grid>
+                                        <Button ToolTip="Диапазон значений: от 10 до 1000 км" Click="changeCanvas">Изменить ширину и высоту</Button>
+                                        <GroupBox Header="Выделение и удаление фигур">
+                                            <StackPanel>
+                                                <CheckBox x:Name="selectShapes" Margin="3,3,3,3">Выделять фигуры при нажатии</CheckBox>
+                                                <Button Click="deleteSelectedShapes">Удаление выделенных фигур</Button>
+                                                <Button Click="deselect">Снятие выделений</Button>
+                                            </StackPanel>
+                                        </GroupBox>
+                                    </StackPanel>
+                                </GroupBox>
+
+                                <GroupBox Header="Загрузка и сохранение">
+                                    <StackPanel>
+                                        <Label Style="{StaticResource leftLabel}">Выберите карту для загрузки:</Label>
+                                        <ComboBox x:Name="Maps" />
+                                        <Button Click="loadMap">Загрузить карту</Button>
+                                        <Label Style="{StaticResource leftLabel}">Введите имя для карты:</Label>
+                                        <TextBox x:Name="mapName" />
+                                        <Button Click="saveMap">Сохранить карту</Button>
+                                    </StackPanel>
+                                </GroupBox>
+                            </StackPanel>
+                        </Border>
+
+
+                        <!--<Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" >
+                        <GroupBox Header="Добавление моделей:">
+                            <StackPanel>
+                                <Label Style="{StaticResource leftLabel}">Выберите модель:</Label>
+                                <ComboBox x:Name="comboBox">
+                                    <ComboBoxItem>БА-6</ComboBoxItem>
+                                    <ComboBoxItem>ГАЗ-АА</ComboBoxItem>
+                                    <ComboBoxItem>СУ-12-1</ComboBoxItem>
+                                    <ComboBoxItem>Т-37</ComboBoxItem>
+                                    <ComboBoxItem>122мм</ComboBoxItem>
+                                    <ComboBoxItem>Бочка</ComboBoxItem>
+                                </ComboBox>
+                                <CheckBox Click="CheckBox_Click">Добавлять фигуры</CheckBox>
+                                <Button Click="Button_Click">Для breakpoint</Button>
+                                <ScrollViewer  VerticalScrollBarVisibility="Visible" CanContentScroll="True">
+                                    <StackPanel x:Name="forces" Height="600" OverridesDefaultStyle="False" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                </ScrollViewer>
+                            </StackPanel>
+                        </GroupBox>
+                    </Border>-->
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Войска" Name="Units">
+                    <GroupBox Header="Войска">
+
+                        <StackPanel Visibility="Visible">
+
+                            <Label>Выберите тип:</Label>
+                            <ComboBox x:Name="UnitTypes">
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Infantry</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Cavalry</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Artillery</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Armor</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>AirForce</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Navy</GEChar:UnitType>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GEChar:UnitType>Engineers</GEChar:UnitType>
+                                </ComboBoxItem>
+                            </ComboBox>
+
+                            <Label>Выберите страну</Label>
+                            <!--TODO: забить все страны-->
+                            <ComboBox x:Name="Country">
+                                <ComboBoxItem>
+                                    <GE:Countries>USSR</GE:Countries>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GE:Countries>Japan</GE:Countries>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GE:Countries>Mongolia</GE:Countries>
+                                </ComboBoxItem>
+                                <ComboBoxItem>
+                                    <GE:Countries>Manchukuo</GE:Countries>
+                                </ComboBoxItem>
+                            </ComboBox>
+
+                            <Label>Выберите сторону:</Label>
+                            <ComboBox x:Name="Side">
+                                <ComboBoxItem>1</ComboBoxItem>
+                                <ComboBoxItem>0</ComboBoxItem>
+                            </ComboBox>
+
+                            <GroupBox Margin="5,5,5,5" Header="Созидание!">
+                                <TabControl Height="509" Width="275">
+                                    <TabItem Header="Создание групп">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Label>Введите численность:</Label>
+                                                <TextBox Style="{StaticResource rightTextBox}" x:Name="unitCount"/>
+                                            </Grid>
+                                            <Label>Выберите звание:</Label>
+                                            <ComboBox x:Name="Rank">
+                                                <ComboBoxItem>
+                                                    <GEChar:Rank>Ordinary</GEChar:Rank>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Rank>Sergeant</GEChar:Rank>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Rank>Officer</GEChar:Rank>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Label>Выберите специализацию:</Label>
+                                            <ComboBox x:Name="Specialization">
+                                                <ComboBoxItem>
+                                                    <GEChar:Specialization>InfantryMan</GEChar:Specialization>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Specialization>EngineerMan</GEChar:Specialization>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Specialization>TankMan</GEChar:Specialization>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Label>Выберите квалификацию:</Label>
+                                            <ComboBox x:Name="Qualification">
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>low</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>medium</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>high</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Label>Выберите состояние здоровья:</Label>
+                                            <ComboBox x:Name="Vitality">
+                                                <ComboBoxItem>
+                                                    <GEChar:Vitality>healthy</GEChar:Vitality>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Vitality>wounded</GEChar:Vitality>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Vitality>heavilyWounded</GEChar:Vitality>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Vitality>dead</GEChar:Vitality>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Label>Выберите уровень опыта:</Label>
+                                            <ComboBox x:Name="Experience">
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>low</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>medium</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEChar:Qualification>high</GEChar:Qualification>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+                                            <Button Click="CreateGroup" Height="54">Создать группу</Button>
+                                            <StackPanel>
+                                                <TextBlock Name="messageGroup" Margin="10" Text="" Height="22" Width="243"></TextBlock>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Оружие">
+                                        <StackPanel>
+                                            <Label>Калибр оружия:</Label>
+                                            <ComboBox x:Name="weaponCaliber">
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>smallArms</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>largeSmallArms</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>small</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>medium</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>large</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>extraLarge</GEo:Caliber>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Label >Броню техники:</Label>
+                                            <ComboBox x:Name="armorCaliber">
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>smallArms</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>largeSmallArms</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>small</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>medium</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>large</GEo:Caliber>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:Caliber>extraLarge</GEo:Caliber>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="271" />
+                                                    <ColumnDefinition Width="13" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label FontSize="18" Grid.ColumnSpan="2">
+                                                    <Label.Content>
+                                                        <TextBlock TextWrapping="Wrap" >Максимальная скорость движения:</TextBlock>
+                                                    </Label.Content>
+                                                </Label>
+                                                <TextBox x:Name="movementSpeed" Style="{StaticResource rightTextBox}" Margin="0,24,0,0" Width="42" />
+                                            </Grid>
+
+                                            <Grid>
+                                                <Label Height="58">Скорострельность оружия:</Label>
+                                                <TextBox x:Name="fireRate" Style="{StaticResource rightTextBox}" Height="34" Margin="0,24,0,0" />
+                                            </Grid>
+
+                                            <Grid>
+                                                <Label Height="58">Количество экипажа:</Label>
+                                                <TextBox x:Name="crew" Style="{StaticResource rightTextBox}" Height="34" Margin="0,24,0,0" />
+                                            </Grid>
+
+                                            <Grid>
+                                                <Label>
+                                                    <Label.Content>
+                                                        <TextBlock TextWrapping="Wrap">Количество данного вида техники:</TextBlock>
+                                                    </Label.Content>
+                                                </Label>
+                                                <TextBox x:Name="count" Style="{StaticResource rightTextBox}" Height="34" Margin="0,24,0,0" />
+                                            </Grid>
+                                            <Button Click="CreateItem">Создать оружие.</Button>
+
+                                            <TextBlock Name="messageItem" Margin="10" Text="" Height="22" Width="243"></TextBlock>
+
+                                        </StackPanel>
+                                    </TabItem>
+                                    <TabItem Header="Небоевой предмет">
+                                        <StackPanel>
+                                            <Label>Выберите тип предмета:</Label>
+                                            <ComboBox x:Name="goodsType">
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Ammunition</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Fuel</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Provision</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Medicines</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Spares</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>BuildingMaterials</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                                <ComboBoxItem>
+                                                    <GEo:ObjectType>Structures</GEo:ObjectType>
+                                                </ComboBoxItem>
+                                            </ComboBox>
+                                            <Grid>
+                                                <Label>Количество:</Label>
+                                                <TextBox x:Name="objCount" Style="{StaticResource rightTextBox}" />
+                                            </Grid>
+                                            <Button Click="CreateGood">Создать небоевой предмет.</Button>
+                                            <TextBlock Name="messageGood" Margin="10" Text="" Height="22" Width="243"></TextBlock>
+                                        </StackPanel>
+                                    </TabItem>
+                                </TabControl>
+                            </GroupBox>
+
+                            <Button Click="CreateUnit">Создать войско</Button>
+                            <TextBlock Name="messageUnit" Margin="10" Text="" Height="22" Width="243"></TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                </TabItem>
+            </TabControl >
+        </ScrollViewer>
+
+        <Button Name="CloseButton"  Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="CloseButton_Click" DockPanel.Dock="Right"/>
+
+        <Border Grid.Column="2" BorderThickness="2" BorderBrush="Black" Grid.ColumnSpan="2">
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                <Grid>
+                    <ContentControl Name="mapToDraw"
+                                Content="{Binding Map, Mode=OneWay}" ContentTemplate="{StaticResource Map}"
+                                MouseDown="canvasClick" Margin="0,2,1,0" AllowDrop="True">
+                        <ContentControl.Background>
+                            <ImageBrush/>
+                        </ContentControl.Background>
+                    </ContentControl>
+                </Grid>
+            </ScrollViewer>
+            
+        </Border>
+
+    </DockPanel>
+</Window>

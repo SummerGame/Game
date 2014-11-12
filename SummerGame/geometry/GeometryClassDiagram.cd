@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Geometry.Figure">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Figure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.Circle">
+    <Position X="5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Figures\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.ConvexPolygon">
+    <Position X="9.5" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQACAEAAAgBAAAAAAAAAAAAAACAAIAAAAAAAIAAA=</HashCode>
+      <FileName>Figures\ConvexPolygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.Point">
+    <Position X="0.5" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAACAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Figures\Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.Polyline">
+    <Position X="7.25" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAgAAgBRAAAAAAAAAACAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Figures\Polyline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.LastPolyAndPosition">
+    <Position X="15.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAACIAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Figures\Polyline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.Segment">
+    <Position X="2.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAgAAAAAAAAAAAAGAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Figures\Segment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Geometry.Figures.Intersect">
+    <Position X="12.75" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Intersect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

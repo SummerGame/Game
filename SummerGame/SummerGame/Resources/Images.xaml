@@ -1,0 +1,43 @@
+﻿<!--Список изображений для свойств отряда-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Типы войск -->
+    <Image x:Key="InfantryImage" Source="\..\Images\Infantry.jpg"/>
+    <Image x:Key="ArmorImage" Source="\..\Images\Tank.jpg"/>
+    <Image x:Key="EngineersImage" Source="..\Images\Engineers.jpg"/>
+    <Image x:Key="ArtilleryImage" Source="\..\Images\Artillery.jpg"/>
+    <Image x:Key="AirForceImage" Source="\..\Images\AirForce.jpg"/>
+    <Image x:Key="CavalryImage" Source="\..\Images\Cavalry.jpg"/>
+    <Image x:Key="NavyImage" Source="\..\Images\Navy.jpg"/>
+
+    <!-- Оружие по калибрам -->
+    <Image x:Key="СaliberSmallArms" Source="\..\Images\caliberSmallArms.bmp"/>
+    <Image x:Key="СaliberLargeSmallArms" Source="\..\Images\caliberLargeSmallArms.bmp"/>
+    <Image x:Key="СaliberSmall" Source="\..\Images\caliberSmall.bmp"/>
+    <Image x:Key="СaliberMedium" Source="\..\Images\caliberMedium.bmp"/>
+    <Image x:Key="СaliberLarge" Source="\..\Images\caliberLarge.bmp"/>
+    <Image x:Key="СaliberExtraLarge" Source="\..\Images\caliberExtraLarge.bmp"/>
+
+    <!-- Защита по калибрам -->
+    <Image x:Key="DefendCaliberSmallArms" Source="\..\Images\defendCaliberSmallArms.bmp"/>
+    <Image x:Key="DefendCaliberLargeSmallArms" Source="\..\Images\defendCaliberLargeSmallArms.bmp"/>
+    <Image x:Key="DefendCaliberSmall" Source="\..\Images\defendCaliberSmall.bmp"/>
+    <Image x:Key="DefendCaliberMedium" Source="\..\Images\defendCaliberMedium.bmp"/>
+    <Image x:Key="DefendCaliberLarge" Source="\..\Images\defendCaliberLarge.bmp"/>
+    <Image x:Key="DefendCaliberExtraLarge" Source="\..\Images\defendCaliberExtraLarge.bmp"/>
+
+    <Image x:Key="HeavyArmour" Source="\..\Images\heavyArmour.jpg"/>
+    
+    <!-- Значки характеристик отряда -->
+    <Image x:Key="ParameterSpeed" Source="\..\Images\parameterSpeed.jpg"/>
+    <Image x:Key="ParameterBinoculars" Source="\..\Images\parameterBinoculars.jpg"/>
+    <Image x:Key="ParameterAttackDistance" Source="\..\Images\parameterAttackDistance.jpg"/>
+    <Image x:Key="ParameterAmmo" Source="\..\Images\parameterAmmo.jpg"/>
+
+    <!-- Флаги -->
+    <Image x:Key="FlagUSSR" Source="\..\Images\flagUSSR.jpg"/>
+    <Image x:Key="FlagGermany" Source="\..\Images\flagGermany.jpg"/>
+    <Image x:Key="FlagUSA" Source="\..\Images\flagUSA.jpg"/>
+    
+</ResourceDictionary>

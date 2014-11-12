@@ -1,0 +1,192 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--Чтобы взять колёса, диски, их цвета-->
+        <ResourceDictionary Source="CommonData.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+
+    <Viewport3D x:Key="gun122mm">
+
+        <Viewport3D.Camera>
+            <PerspectiveCamera Position="3 3 3" LookDirection="-1 -1 -1" FieldOfView="40">
+                <PerspectiveCamera.Transform>
+                    <RotateTransform3D CenterX="0" CenterY="0" CenterZ="0">
+                        <RotateTransform3D.Rotation>
+                            <AxisAngleRotation3D Angle="90" Axis="0 0 1"/>
+                        </RotateTransform3D.Rotation>
+                    </RotateTransform3D>
+                </PerspectiveCamera.Transform>
+            </PerspectiveCamera>
+        </Viewport3D.Camera>
+
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <AmbientLight Color="White" />
+                    <DirectionalLight Color="White" Direction="-3,-3,-3"/>
+                    <DirectionalLight Color="White" Direction="-3,3,-3"/>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <Model3DGroup.Transform>
+                        <Transform3DGroup>
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D Axis="0,0,1" Angle="90"/>
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+
+                            <RotateTransform3D>
+                                <RotateTransform3D.Rotation>
+                                    <AxisAngleRotation3D Angle="{Binding Angle}"  Axis="1,0,0" />
+                                </RotateTransform3D.Rotation>
+                            </RotateTransform3D>
+
+                        </Transform3DGroup>
+                    </Model3DGroup.Transform>
+
+                    <!--перед -->
+                    <GeometryModel3D>
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="
+                                0,0,0.2 0,0,0.8 0,0.2,0.8 0.3,0.7,0.8 0.3,0.7,0.2 0,0.2,0.2
+                                0,0.2,0.4 0,0.2,0.6 0.15,0.45,0.4 0.15,0.45,0.6
+                                
+                                0.9,0.2,0.4 0.9,0.2,0.43 0,0.2,0.43
+                                0,0.15,0.4 0,0.15,0.43 0.9,0.15,0.4 0.9,0.15,0.43
+                                0,0.2,0.57 0.9,0.2,0.57 0.9,0.2,0.6 
+                                0,0.15,0.57 0.9,0.15,0.57 0,0.15,0.6 0.9,0.15,0.6 
+                                
+                                1.1,0.2,0.5 1.3,0.2,0.47 1.3,0.2,0.53
+                                1.1,0.15,0.5 1.3,0.15,0.47 1.3,0.15,0.53
+                                
+                                0.9,0.2,0.6 0.9,0.15,0.6
+                                
+                                "                                           
+                                TriangleIndices="
+                                0,1,2 0,2,5 7,2,3 7,3,9 5,6,8 5,8,4 8,9,3 8,3,4
+                                
+                                10,11,12 10,12,6 15,16,14 15,14,13 15,10,6 15,6,13 11,16,14 11,14,12
+                                18,19,7 18,7,17 21,18,17 21,17,20 19,22,23 19,22,7 23,22,21 
+                                24,25,26 26,19,18 26,18,24 25,24,11 25,11,10 28,29,26 28,26,25 15,28,26 15,25,10
+                                11,27,24 11,16,27  29,28,23 28,30,31
+                                
+                                "/>
+                        </GeometryModel3D.Geometry>
+                        <!--28,10,15 26,29,22  -->
+
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <SolidColorBrush Color="Green" Opacity="1.0" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.Material>
+
+                        <GeometryModel3D.BackMaterial>
+                            <DiffuseMaterial>
+                                <DiffuseMaterial.Brush>
+                                    <SolidColorBrush Color="Green" Opacity="1.0" />
+                                </DiffuseMaterial.Brush>
+                            </DiffuseMaterial>
+                        </GeometryModel3D.BackMaterial>
+
+                    </GeometryModel3D>
+
+                    <!--первое колесо-->
+                    <Model3DGroup>
+                        <Model3DGroup.Transform>
+                            <Transform3DGroup>
+                                <ScaleTransform3D ScaleZ="0.05" ScaleY="0.3" ScaleX="0.3"/>
+                                <TranslateTransform3D OffsetZ="0.14" OffsetX="0.1" OffsetY="-0.05"/>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,0,1" Angle="90"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </Transform3DGroup>
+                        </Model3DGroup.Transform>
+                        <GeometryModel3D Geometry="{StaticResource ResourceKey=wheelGeometry}" BackMaterial="{StaticResource ResourceKey=wheelColor}" Material="{StaticResource ResourceKey=wheelColor}" />
+                        <GeometryModel3D Geometry="{StaticResource ResourceKey=spokesGeometry}" BackMaterial="{StaticResource ResourceKey=holeColor}" Material="{StaticResource ResourceKey=holeColor}">
+                        </GeometryModel3D>
+                    </Model3DGroup>
+
+                    <!--второе колесо-->
+                    <Model3DGroup>
+                        <Model3DGroup.Transform>
+                            <Transform3DGroup>
+                                <ScaleTransform3D ScaleZ="0.05" ScaleY="0.3" ScaleX="0.3"/>
+                                <TranslateTransform3D OffsetZ="0.8" OffsetX="0.1" OffsetY="-0.05"/>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,0,1" Angle="90"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                            </Transform3DGroup>
+                        </Model3DGroup.Transform>
+                        <GeometryModel3D Geometry="{StaticResource ResourceKey=wheelGeometry}" BackMaterial="{StaticResource ResourceKey=wheelColor}" Material="{StaticResource ResourceKey=wheelColor}" />
+                        <GeometryModel3D Geometry="{StaticResource ResourceKey=spokesGeometry}" BackMaterial="{StaticResource ResourceKey=holeColor}" Material="{StaticResource ResourceKey=holeColor}">
+                        </GeometryModel3D>
+                    </Model3DGroup>
+
+                    <!--ствол пушки -->
+                    <GeometryModel3D Geometry="{StaticResource ResourceKey=wheelGeometry}" BackMaterial="{StaticResource ResourceKey=wheelColor}" Material="{StaticResource ResourceKey=wheelColor}">
+                        <GeometryModel3D.Transform>
+                            <Transform3DGroup>
+                                <TranslateTransform3D OffsetZ="-0.7" OffsetX="-12.9" OffsetY="10"/>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,1,0" Angle="90"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                                <ScaleTransform3D ScaleZ="0.04" ScaleY="0.04" ScaleX="0.7"/>
+                            </Transform3DGroup>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+
+                    <GeometryModel3D Geometry="{StaticResource ResourceKey=wheelGeometry}" BackMaterial="{StaticResource ResourceKey=holeColor}" Material="{StaticResource ResourceKey=holeColor}">
+                        <GeometryModel3D.Transform>
+                            <Transform3DGroup>
+                                <TranslateTransform3D OffsetZ="-0.7" OffsetX="-16" OffsetY="11"/>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,1,0" Angle="90"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                                <ScaleTransform3D ScaleZ="0.03" ScaleY="0.03" ScaleX="0.6"/>
+                            </Transform3DGroup>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                    <GeometryModel3D Geometry="{StaticResource ResourceKey=wheelGeometry}" BackMaterial="{StaticResource ResourceKey=holeColor}" Material="{StaticResource ResourceKey=holeColor}">
+                        <GeometryModel3D.Transform>
+                            <Transform3DGroup>
+                                <TranslateTransform3D OffsetZ="-0.7" OffsetX="-18" OffsetY="11"/>
+                                <RotateTransform3D>
+                                    <RotateTransform3D.Rotation>
+                                        <AxisAngleRotation3D Axis="0,1,0" Angle="90"/>
+                                    </RotateTransform3D.Rotation>
+                                </RotateTransform3D>
+                                <ScaleTransform3D ScaleZ="0.03" ScaleY="0.03" ScaleX="0.6"/>
+                            </Transform3DGroup>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+
+            <ModelVisual3D.Transform>
+                <RotateTransform3D CenterX="0" CenterY="0" CenterZ="0">
+                    <RotateTransform3D.Rotation>
+                        <AxisAngleRotation3D Angle="270" Axis="1 0.2 0"/>
+                    </RotateTransform3D.Rotation>
+                </RotateTransform3D>
+
+            </ModelVisual3D.Transform>
+        </ModelVisual3D>
+    </Viewport3D>
+
+</ResourceDictionary>

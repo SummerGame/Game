@@ -1,0 +1,251 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Drawer">
+
+    <local:PolygonValueConverter x:Key="PolygonConverter"/>
+    <local:VisibilityValueConverter x:Key="VisibilityConverter"/>
+
+    <!-- DrawableElement -->
+    <DataTemplate x:Key="DrawableElement" DataType="local:DrawableElement">
+
+        <ContentControl Name="AControl"/>
+
+        <DataTemplate.Triggers>
+
+            <!-- Text -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Text">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <ItemsControl ItemsSource="{Binding Path=Comment}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Canvas.Left" Value="{Binding Parameters[0]}"/>
+                <Setter Property="Canvas.Top" Value="{Binding Parameters[1]}"/>
+            </DataTrigger>
+
+            <!-- Circle -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Circle">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Ellipse Stroke="{Binding Settings.Color}" ToolTip="{Binding Comment[0]}"
+                                         Width="{Binding Parameters[2]}" 
+                                         Height="{Binding Parameters[2]}"/>
+                                <ContentControl Content="{Binding Path=Name}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="Canvas.Left" Value="{Binding Parameters[0]}"/>
+                <Setter Property="Canvas.Top" Value="{Binding Parameters[1]}"/>
+
+            </DataTrigger>
+
+            <!-- Ellipse -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Ellipse">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Ellipse Stroke="{Binding Settings.Color}" ToolTip="{Binding Comment[0]}"
+                                         Width="{Binding Parameters[2]}" 
+                                         Height="{Binding Parameters[3]}">
+                                    <Ellipse.RenderTransform>
+                                        <RotateTransform Angle="{Binding Parameters[4]}"
+                                                         CenterX="{Binding Parameters[5]}" CenterY="{Binding Parameters[6]}"/>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                                <ContentControl Content="{Binding Path=Name}" 
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Canvas.Left" Value="{Binding Parameters[0]}"/>
+                <Setter Property="Canvas.Top" Value="{Binding Parameters[1]}"/>
+            </DataTrigger>
+
+            <!-- Point -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Point">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Ellipse Fill="Red" Width="5" Height="5" ToolTip="{Binding Path=Comment[0]}"
+                                         Canvas.Left="-3" Canvas.Top="-3" Stroke="{Binding Settings.Color}"/>
+                                <ContentControl Content="{Binding Path=Name}" 
+                                       Canvas.Left="3" Canvas.Top="3"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Canvas.Left" Value="{Binding Parameters[0]}"/>
+                <Setter Property="Canvas.Top" Value="{Binding Parameters[1]}"/>
+            </DataTrigger>
+
+            <!-- Segment -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Segment">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Line Stroke="{Binding Settings.Color}" StrokeThickness="1" 
+                                      X1="{Binding Parameters[0]}" Y1="{Binding Parameters[1]}"
+                                      X2="{Binding Parameters[2]}" Y2="{Binding Parameters[3]}"
+                                      ToolTip="{Binding Comment[0]}"/>
+                                <Label Content="{Binding Settings.Name}" 
+                                       Margin="0,10,0,0"/>
+
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Vector -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Vector">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Polyline Stroke="{Binding Settings.Color}"  StrokeThickness="1" 
+                                          Points="{Binding Parameters, Converter={StaticResource PolygonConverter}}" ToolTip="{Binding Comment[0]}">
+                                    <Polyline.RenderTransform>
+                                        <RotateTransform Angle="{Binding Parameters[12]}" 
+                                                         CenterX="{Binding Parameters[0]}" CenterY="{Binding Parameters[1]}"/>
+                                    </Polyline.RenderTransform>
+                                </Polyline>
+                                <Label Content="{Binding Name}" 
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Polygon -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Polygon">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Polygon Points="{Binding Parameters, Converter={StaticResource PolygonConverter}}" 
+                                         Stroke="{Binding Settings.Color}" ToolTip="{Binding Comment[0]}"/>
+                                <Label Content="{Binding Name}" Canvas.Left="{Binding Parameters[0]}" Canvas.Top="{Binding Parameters[1]}"
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+            <!-- Polyline -->
+            <DataTrigger Binding="{Binding Path=Type}" Value="Polyline">
+                <Setter TargetName="AControl" Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Canvas>
+                                <Polyline Points="{Binding Parameters, Converter={StaticResource PolygonConverter}}" 
+                                         Stroke="{Binding Settings.Color}" ToolTip="{Binding Comment[0]}"/>
+                                <Label Content="{Binding Name}" Canvas.Left="{Binding Parameters[0]}" Canvas.Top="{Binding Parameters[1]}"
+                                       Margin="0,10,0,0"/>
+                            </Canvas>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- Chart -->
+    <DataTemplate x:Key="Chart" DataType="local:Chart">
+
+        <ItemsControl 
+            Visibility="{Binding Settings.Visible, Converter={StaticResource VisibilityConverter}}"
+            ItemsSource="{Binding Elements}" 
+            ItemTemplate="{StaticResource DrawableElement}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas></Canvas>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                    <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+
+    </DataTemplate>
+
+    <!-- ChartButton -->
+    <DataTemplate x:Key="ChartButton" DataType="local:ChartSettings">
+        <CheckBox Name="VisibilityButton" Content="{Binding Name}" Margin="3,3,3,3" Padding="3,3,3,3" IsChecked="{Binding Visible,Mode=TwoWay}"/>
+
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Visible}" Value="true">
+                <DataTrigger.Setters>
+                    <Setter TargetName="VisibilityButton" Property="Opacity" Value="1"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Visible}" Value="false">
+                <DataTrigger.Setters>
+                    <Setter TargetName="VisibilityButton" Property="Opacity" Value="0.5"/>
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
+    </DataTemplate>
+
+    <!-- Port -->
+    <DataTemplate x:Key="Port"  DataType="local:Port">
+        <DockPanel>
+
+            <!-- Buttons -->
+            <Border Background="AliceBlue">
+                <ItemsControl ItemsSource="{Binding Path=ChartSettings}" ItemTemplate="{StaticResource ChartButton}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <!-- Drawing -->
+            <ItemsControl ItemsSource="{Binding Path=Charts}" ItemTemplate="{StaticResource Chart}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid></Grid>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+        </DockPanel>
+    </DataTemplate>
+
+    <!-- Drawer -->
+    <Style TargetType="{x:Type local:Drawer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Drawer}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentControl Content="{TemplateBinding Port}" ContentTemplate="{StaticResource Port}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

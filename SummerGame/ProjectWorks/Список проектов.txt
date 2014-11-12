@@ -1,0 +1,15 @@
+Денис
+
+GameEngine -> Characters
+
+UserInterface
+
+SummerGame -> Resources
+
+Галя
+
+MapDrawer -> ConvertToPoligons, UnitCreater
+
+Geometry 
+
+SummerGame -> EditorWindow

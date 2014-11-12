@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:agame="clr-namespace:AbstractGameEngine;assembly=AbstractGameEngine"
+                    xmlns:units="clr-namespace:GameEngine.Characters;assembly=GameEngine"
+                    xmlns:presenters="clr-namespace:UserInterface.Presenters;assembly=UserInterface"
+                    >
+
+    <ResourceDictionary.MergedDictionaries>
+        <!--Чтобы взять шаблон крестика-->
+        <ResourceDictionary Source="ObjectPropertiesPageDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Просто стрелка -->
+    <ControlTemplate x:Key="Arrow" TargetType="ContentControl">
+        <Polyline Points="0,0 12,0 10,2 11,0 12,0 10,-2 11,0"
+                  Stroke="{TemplateBinding Foreground}" 
+                  StrokeThickness="2"
+                  Width="{TemplateBinding Width}"
+                  Stretch="Fill"
+                  />
+    </ControlTemplate>
+
+    <!-- Маркер действия -->
+    <DataTemplate x:Key="ActionMarker" DataType="{x:Type presenters:OrderPresenter}">
+        <StackPanel>
+            <Canvas Visibility="{Binding VisibleWayAim}">
+                <ContentControl Name="Marker" Height="6"
+                                Template="{StaticResource Arrow}"
+                            Width="{Binding Converter={StaticResource MoveActionLength}}"
+                            Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Path=Foreground}"
+                                >
+                    <ContentControl.RenderTransform>
+                        <RotateTransform Angle="{Binding Converter={StaticResource MoveActionDirection}}"/>
+                    </ContentControl.RenderTransform>
+                </ContentControl>
+
+                <Grid Height="40" Width="40" Margin="-20,-20"
+                      Canvas.Left="{Binding DeltaHorisontal}"
+                      Canvas.Top="{Binding DeltaVertical}">
+                    <!--Изображение значка цели премещения отряда-->
+                    <ContentControl Name="AimMarker"
+                                Template="{StaticResource CloseWindowCross}"
+                                Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentControl}, Path=Foreground}"
+                                >
+                    </ContentControl>
+                    <TextBlock Foreground="AntiqueWhite" 
+                           FontSize="10" FontWeight="Bold"
+                           TextAlignment="Center" VerticalAlignment="Center"
+                           TextOptions.TextFormattingMode="Display"
+                           Text="{Binding TurnsToComplete}" >
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="2" ShadowDepth="3"/>
+                        </TextBlock.Effect>
+                    </TextBlock>
+                </Grid>
+            </Canvas>
+        </StackPanel>
+
+
+        <DataTemplate.Triggers>
+            <!-- Маркер движения ( марша ) -->
+            <DataTrigger Binding="{Binding Type}" >
+                <Setter TargetName="Marker" Property="Template" Value="{StaticResource Arrow}"/>
+                <Setter TargetName="Marker" Property="Width" Value="{Binding Converter={StaticResource MoveActionLength}}"/>
+                <Setter TargetName="Marker" Property="RenderTransform">
+                    <Setter.Value>
+                        <RotateTransform Angle="{Binding Converter={StaticResource MoveActionDirection}}"/>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+
+
+    </DataTemplate>
+
+    <!--Пустой шаблон, отображаемый, когда у отряда нет действия-->
+    <DataTemplate x:Key="ActionMarker1" DataType="{x:Type presenters:OrderPresenter}">
+        <Rectangle Width="0" Height="0"/>
+    </DataTemplate>
+
+    <!-- Служебный шаблон отрисовки юнита как действия -->
+    <DataTemplate x:Key="UnitActionMarker" DataType="{x:Type presenters:UnitPresenter}">
+        <ContentControl Name="Content" IsHitTestVisible="False"
+                        Content="{Binding CurrentAction}" 
+                        ContentTemplate="{StaticResource ActionMarker}"
+                        Foreground="{Binding Converter={StaticResource UnitToColor}}"
+                        />
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding CurrentAction}" Value="{x:Null}">
+                <Setter TargetName="Content" Property="ContentTemplate" Value="{StaticResource ActionMarker1}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding CurrentAction}">
+                <Setter TargetName="Content" Property="ContentTemplate" Value="{StaticResource ActionMarker}"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+</ResourceDictionary>

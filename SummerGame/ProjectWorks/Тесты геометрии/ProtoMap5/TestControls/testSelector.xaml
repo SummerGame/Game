@@ -1,0 +1,34 @@
+﻿<Page x:Class="ProtoMap5.TestControls.TestSelector"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+      d:DesignHeight="200" d:DesignWidth="200"
+	  Title="testControls1">
+
+    <!-- xmlns:test="clr-namespace:MyTestEnvironment;assembly=MyTestEnvironment" -->
+    
+    <GroupBox>
+        <GroupBox.Header>Выбор алгоритма</GroupBox.Header>
+        <DockPanel>
+
+            <Button Name="NextButton" Command="NextPage" CommandTarget="{Binding ElementName=TestPage}"
+                    DockPanel.Dock="Bottom"
+                    HorizontalAlignment="Right" Margin="10,10,10,10" 
+                    Template="{StaticResource ResourceKey=RightArrowButton}"/>
+
+            <StackPanel HorizontalAlignment="Left" Margin="10,10,10,10">
+                <TextBlock TextWrapping="Wrap" Text="Тестировать алгоритм"/>
+                <ComboBox Name="AlgoSelector" MaxWidth="250" SelectionChanged="AlgoSelectorSelectionChanged" 
+                          ItemsSource="{Binding Path=Names}"/>
+                <GridSplitter Height="10"/>
+                <TextBlock TextWrapping="Wrap" Text="Режим задания исходных данных"/>
+                <ComboBox Name="DataSourceSelector" MaxWidth="250" 
+                          SelectedValue="{Binding Path=SelectedInputMode, Mode=TwoWay}"
+                          ItemTemplate="{StaticResource ResourceKey=InputCreation}"/>
+            </StackPanel>
+
+        </DockPanel>
+
+    </GroupBox>
+</Page>

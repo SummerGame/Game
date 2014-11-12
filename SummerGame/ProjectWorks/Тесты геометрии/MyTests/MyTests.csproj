@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95D925F7-88D3-42CE-B76D-4CD86B321180}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyTests</RootNamespace>
+    <AssemblyName>MyTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\CircleSet.cs" />
+    <Compile Include="CircleTest.cs" />
+    <Compile Include="Data\PoligonSet.cs" />
+    <Compile Include="PointPolygonTest.cs" />
+    <Compile Include="PolygonTest.cs" />
+    <Compile Include="PolylinePoligonTest.cs" />
+    <Compile Include="SegmentPolygonTest.cs" />
+    <Compile Include="SegmentCircleTest.cs" />
+    <Compile Include="PointCircleTest.cs" />
+    <Compile Include="PointSegmentTest.cs" />
+    <Compile Include="PointTest.cs" />
+    <Compile Include="Data\SegmentSet.cs" />
+    <Compile Include="Data\PointSet.cs" />
+    <Compile Include="SegmentTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Drawer\Drawer.csproj">
+      <Project>{44DCD3B9-0E09-40DE-958C-229D2609FDEB}</Project>
+      <Name>Drawer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Geometry\Geometry.csproj">
+      <Project>{91301826-BBD3-4A39-8CD4-435FA089E815}</Project>
+      <Name>Geometry</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyTestEnvironment\MyTestEnvironment.csproj">
+      <Project>{AD5B58C7-3B4C-4E34-A75C-9256FE6FAB4C}</Project>
+      <Name>MyTestEnvironment</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

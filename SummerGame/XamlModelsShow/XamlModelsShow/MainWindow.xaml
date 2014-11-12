@@ -1,0 +1,68 @@
+﻿<Window x:Class="XamlModelsShow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="575" Width="880"
+        xmlns:presenter="clr-namespace:XamlModelsShow">
+
+    <!---Откуда брать шаблоны фигур-->
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="3Dobjects.xaml"/>
+                <ResourceDictionary Source="Warship.xaml"/>
+                <ResourceDictionary Source="T-34.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+
+    <Grid>
+        <ContentControl x:Name="ObjectToShow" 
+                        Content="{Binding SelectedItem, ElementName=cbFigures}"
+                        ContentTemplate="{StaticResource ModelTemplate}"
+                        />
+
+        <ComboBox x:Name="cbFigures" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                  Width="196" Margin="598,10,0,0" Background="LightBlue"
+                  ItemTemplate="{StaticResource ModelTypeTemplate}"
+                  >
+
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.Cube}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.Arc}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.Bullet}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.TankShell1}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.Rocket}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.KI_27}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.GAZ_AA}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.T_37}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.SU_12_1}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.BA6}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.Barrel}"/>
+            <presenter:ModelPresenter Angle="0.0"
+                                          Type="{x:Static presenter:ModelType.gun122mm}"/>
+
+
+        </ComboBox>
+
+
+
+        <Slider x:Name="TheSlider" Height="25" VerticalAlignment="Bottom"  Minimum="0" Maximum="360"
+                Margin="0,457,0,0" VerticalContentAlignment="Bottom"
+                Value="{Binding SelectedItem.Angle, ElementName=cbFigures}"
+                ValueChanged="Slider_ValueChanged" />
+
+    </Grid>
+</Window>
